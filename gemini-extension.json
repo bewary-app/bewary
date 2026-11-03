@@ -1,0 +1,20 @@
+{
+  "name": "bewary",
+  "version": "0.1.0",
+  "description": "Scam, phishing and fraud checks for links, domains, phone numbers, emails, crypto wallets and IBANs, through Bewary's remote MCP server.",
+  "mcpServers": {
+    "bewary": {
+      "httpUrl": "https://api.bewary.app/mcp",
+      "headers": { "Authorization": "Bearer ${BEWARY_API_KEY}" }
+    }
+  },
+  "settings": [
+    {
+      "name": "Bewary API key",
+      "description": "A free key gets 1,000 credits a month, no card: https://bewary.app/account",
+      "envVar": "BEWARY_API_KEY",
+      "sensitive": true
+    }
+  ],
+  "contextFileName": "GEMINI.md"
+}

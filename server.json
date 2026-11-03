@@ -1,0 +1,42 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "app.bewary/bewary",
+  "title": "Bewary scam check",
+  "description": "Scam checks for links, domains, phones, emails, IPs, wallets, IBANs, apps, payment handles",
+  "version": "1.8.0",
+  "websiteUrl": "https://bewary.app/mcp",
+  "repository": {
+    "url": "https://github.com/bewary-app/bewary",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://bewary.app/apple-touch-icon.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "180x180"
+      ]
+    },
+    {
+      "src": "https://bewary.app/favicon.svg",
+      "mimeType": "image/svg+xml",
+      "sizes": [
+        "any"
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.bewary.app/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer and your Bewary API key (a free key gets 1,000 credits a month: https://bewary.app/pricing)",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}

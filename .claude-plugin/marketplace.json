@@ -1,0 +1,15 @@
+{
+  "name": "bewary",
+  "owner": {
+    "name": "Bewary",
+    "email": "hello@bewary.app"
+  },
+  "description": "Bewary's Claude Code plugin: scam, phishing and fraud checks through the Bewary MCP server.",
+  "plugins": [
+    {
+      "name": "bewary",
+      "source": "./",
+      "description": "Scam, phishing and fraud checks through Bewary's remote MCP server, plus a skill for when to check."
+    }
+  ]
+}

@@ -1,0 +1,915 @@
+{
+ "generated_from": "web/src/data/api/{openapi,mcp-tools,codes,pricing}.json + web/src/data/answer-words.json",
+ "api": "https://api.bewary.app",
+ "version": "1.8.0",
+ "commands": [
+  {
+   "command": "url",
+   "tool": "lookup_url",
+   "title": "Look up a link",
+   "description": "Is this link safe to open? Resolves shorteners and redirects and checks where it really goes; on a shortener, says whether the shortener itself disabled, flagged or removed the link. Cost: 1 credit, deep 30.",
+   "method": "GET",
+   "path": "/v1/url",
+   "kind": "lookup",
+   "answer": "Envelope",
+   "args": [
+    {
+     "name": "url",
+     "http": "u",
+     "where": "query",
+     "required": true,
+     "type": "string",
+     "description": ""
+    },
+    {
+     "name": "deep",
+     "http": "deep",
+     "where": "query",
+     "required": false,
+     "type": "boolean",
+     "default": false,
+     "description": "Also read linked pages and verify claimed brands (needs an API key)."
+    }
+   ]
+  },
+  {
+   "command": "domain",
+   "tool": "lookup_domain",
+   "title": "Look up a domain",
+   "description": "Domain age, lookalike-brand technique, abused TLD, blocklist status and a verdict. Cost: 1 credit, deep 30.",
+   "method": "GET",
+   "path": "/v1/domain/{host}",
+   "kind": "lookup",
+   "answer": "Envelope",
+   "args": [
+    {
+     "name": "domain",
+     "http": "host",
+     "where": "path",
+     "required": true,
+     "type": "string",
+     "description": ""
+    },
+    {
+     "name": "deep",
+     "http": "deep",
+     "where": "query",
+     "required": false,
+     "type": "boolean",
+     "default": false,
+     "description": "Also read linked pages and verify claimed brands (needs an API key)."
+    }
+   ]
+  },
+  {
+   "command": "related",
+   "tool": "related_domains",
+   "title": "Find related domains",
+   "description": "Which other domains share infrastructure or a kit with this one: the same IP address, /24, ASN or name servers (from Bewary's own DNS history), one certificate, a registrar and registration time, a page template or a tracking id. Each relation has a strength; CDNs and shared hosting are not pivoted on. Each related domain carries its own verdict. A relation is a link, not proof of common ownership. Cost: 5 credits a page; API key required.",
+   "method": "GET",
+   "path": "/v1/domain/{host}/related",
+   "kind": "record",
+   "answer": "RelatedResponse",
+   "args": [
+    {
+     "name": "domain",
+     "http": "host",
+     "where": "path",
+     "required": true,
+     "type": "string",
+     "description": ""
+    },
+    {
+     "name": "page",
+     "http": "page",
+     "where": "query",
+     "required": false,
+     "type": "integer",
+     "default": 1,
+     "description": ""
+    },
+    {
+     "name": "per_page",
+     "http": "per_page",
+     "where": "query",
+     "required": false,
+     "type": "integer",
+     "default": 25,
+     "description": ""
+    }
+   ]
+  },
+  {
+   "command": "ip",
+   "tool": "lookup_ip",
+   "title": "Look up an IP address",
+   "description": "Network owner, ASN, country, hosting type, reverse DNS. Cost: 1 credit.",
+   "method": "GET",
+   "path": "/v1/ip/{ip}",
+   "kind": "lookup",
+   "answer": "Envelope",
+   "args": [
+    {
+     "name": "ip",
+     "http": "ip",
+     "where": "path",
+     "required": true,
+     "type": "string",
+     "description": ""
+    }
+   ]
+  },
+  {
+   "command": "phone",
+   "tool": "lookup_phone",
+   "title": "Look up a phone number",
+   "description": "Country, number type, blocklist status and a verdict for a phone number. Cost: 1 credit, with line type 10.",
+   "method": "GET",
+   "path": "/v1/phone/{number}",
+   "kind": "lookup",
+   "answer": "Envelope",
+   "args": [
+    {
+     "name": "number",
+     "http": "number",
+     "where": "path",
+     "required": true,
+     "type": "string",
+     "description": ""
+    },
+    {
+     "name": "line_type",
+     "http": "line_type",
+     "where": "query",
+     "required": false,
+     "type": "boolean",
+     "default": false,
+     "description": "Add the live line type (needs an API key)."
+    }
+   ]
+  },
+  {
+   "command": "shortcode",
+   "tool": "lookup_shortcode",
+   "title": "Look up an SMS short code",
+   "description": "Who operates this SMS short code, and is it legitimate, shared or a scam code? Cost: 1 credit.",
+   "method": "GET",
+   "path": "/v1/shortcode/{country}/{code}",
+   "kind": "lookup",
+   "answer": "Envelope",
+   "args": [
+    {
+     "name": "code",
+     "http": "code",
+     "where": "path",
+     "required": true,
+     "type": "string",
+     "description": ""
+    },
+    {
+     "name": "country",
+     "http": "country",
+     "where": "path",
+     "required": false,
+     "type": "string",
+     "default": "US",
+     "description": ""
+    }
+   ]
+  },
+  {
+   "command": "email",
+   "tool": "lookup_email",
+   "title": "Look up an email address",
+   "description": "Mail server, disposable or free provider, role mailbox, and the sender domain's facts. Cost: 1 credit.",
+   "method": "GET",
+   "path": "/v1/email/{address}",
+   "kind": "lookup",
+   "answer": "Envelope",
+   "args": [
+    {
+     "name": "address",
+     "http": "address",
+     "where": "path",
+     "required": true,
+     "type": "string",
+     "description": ""
+    }
+   ]
+  },
+  {
+   "command": "wallet",
+   "tool": "lookup_wallet",
+   "title": "Look up a crypto wallet",
+   "description": "Is this wallet on Bewary's scam list? Cost: 1 credit.",
+   "method": "GET",
+   "path": "/v1/wallet/{chain}/{address}",
+   "kind": "lookup",
+   "answer": "Envelope",
+   "args": [
+    {
+     "name": "chain",
+     "http": "chain",
+     "where": "path",
+     "required": true,
+     "type": "string",
+     "enum": [
+      "btc",
+      "eth",
+      "trx",
+      "ltc",
+      "sol",
+      "xmr",
+      "dash"
+     ],
+     "description": ""
+    },
+    {
+     "name": "address",
+     "http": "address",
+     "where": "path",
+     "required": true,
+     "type": "string",
+     "description": ""
+    }
+   ]
+  },
+  {
+   "command": "iban",
+   "tool": "lookup_iban",
+   "title": "Look up an IBAN",
+   "description": "Is this IBAN valid (country length and structure, check digits), which bank does it belong to (name, BIC), and did a community report name it? Pass the country the payee claims to catch a mismatch. Cost: 1 credit.",
+   "method": "GET",
+   "path": "/v1/iban/{iban}",
+   "kind": "lookup",
+   "answer": "Envelope",
+   "args": [
+    {
+     "name": "iban",
+     "http": "iban",
+     "where": "path",
+     "required": true,
+     "type": "string",
+     "description": "Electronic or print form, spaces allowed."
+    },
+    {
+     "name": "claimed_country",
+     "http": "claimed_country",
+     "where": "query",
+     "required": false,
+     "type": "string",
+     "description": "ISO 3166-1 alpha-2 country the payee claims."
+    }
+   ]
+  },
+  {
+   "command": "app",
+   "tool": "lookup_app",
+   "title": "Look up a mobile app",
+   "description": "Is this app live on the Apple App Store or Google Play, or did the store pull it? Name, developer, rating count and when we first and last saw it live. Cost: 1 credit.",
+   "method": "GET",
+   "path": "/v1/app/{store}/{app_id}",
+   "kind": "lookup",
+   "answer": "Envelope",
+   "args": [
+    {
+     "name": "store",
+     "http": "store",
+     "where": "path",
+     "required": true,
+     "type": "string",
+     "enum": [
+      "apple",
+      "google_play"
+     ],
+     "description": ""
+    },
+    {
+     "name": "app_id",
+     "http": "app_id",
+     "where": "path",
+     "required": true,
+     "type": "string",
+     "description": "Apple: numeric App Store id. Google Play: package name, e.g. com.whatsapp."
+    },
+    {
+     "name": "storefront",
+     "http": "storefront",
+     "where": "query",
+     "required": false,
+     "type": "string",
+     "description": "Apple only: App Store country, ISO 3166-1 alpha-2."
+    }
+   ]
+  },
+  {
+   "command": "payment-handle",
+   "tool": "lookup_payment_handle",
+   "title": "Look up a payment handle",
+   "description": "Does this Cash App $Cashtag, PayPal.me name or Venmo username exist, is it active, and is it on Bewary's scam list? Existence and status only, never the person's name. Cost: 1 credit.",
+   "method": "GET",
+   "path": "/v1/payment-handle/{provider}/{handle}",
+   "kind": "lookup",
+   "answer": "Envelope",
+   "args": [
+    {
+     "name": "provider",
+     "http": "provider",
+     "where": "path",
+     "required": true,
+     "type": "string",
+     "enum": [
+      "cashapp",
+      "paypal",
+      "venmo"
+     ],
+     "description": ""
+    },
+    {
+     "name": "handle",
+     "http": "handle",
+     "where": "path",
+     "required": true,
+     "type": "string",
+     "description": "The $Cashtag, PayPal.me name or Venmo username."
+    }
+   ]
+  },
+  {
+   "command": "watch",
+   "tool": "watch",
+   "title": "Watch an entity",
+   "description": "Get events when a domain, phone number, wallet or brand changes: a domain's IP addresses, name servers, down/up/parked, re-registered, expiring or expired; a listing or delisting; a new lookalike domain of a brand. Watching it again updates the event types. Cost: 1 credit a day (a brand watch also 1 per lookalike event); API key required.",
+   "method": "POST",
+   "path": "/v1/watches",
+   "kind": "record",
+   "answer": "WatchCreated",
+   "args": [
+    {
+     "name": "type",
+     "http": "entity.type",
+     "where": "body",
+     "required": true,
+     "type": "string",
+     "enum": [
+      "domain",
+      "phone",
+      "wallet",
+      "brand"
+     ],
+     "description": ""
+    },
+    {
+     "name": "value",
+     "http": "entity.value",
+     "where": "body",
+     "required": true,
+     "type": "string",
+     "description": "A domain, an E.164 number, a wallet address or a brand id."
+    },
+    {
+     "name": "events",
+     "http": "events",
+     "where": "body",
+     "required": false,
+     "type": "array",
+     "enum": [
+      "domain.ip_changed",
+      "domain.ns_changed",
+      "domain.down",
+      "domain.up",
+      "domain.parked",
+      "domain.listed",
+      "domain.delisted",
+      "domain.reregistered",
+      "domain.expiring",
+      "domain.expired",
+      "domain.held",
+      "phone.listed",
+      "phone.delisted",
+      "wallet.listed",
+      "wallet.delisted",
+      "wallet.sanctioned",
+      "brand.lookalike_registered",
+      "brand.lookalike_cert",
+      "brand.lookalike_live"
+     ],
+     "description": "Omit for every event of the type."
+    }
+   ]
+  },
+  {
+   "command": "unwatch",
+   "tool": "unwatch",
+   "title": "Stop watching",
+   "description": "Delete a watch: no more events or charges. Its events stay readable. Cost: free.",
+   "method": "DELETE",
+   "path": "/v1/watches/{watch_id}",
+   "kind": "record",
+   "answer": "Deleted",
+   "args": [
+    {
+     "name": "id",
+     "http": "watch_id",
+     "where": "path",
+     "required": true,
+     "type": "string",
+     "description": "The watch id (wch_...)."
+    }
+   ]
+  },
+  {
+   "command": "watches",
+   "tool": "list_watches",
+   "title": "List watches",
+   "description": "Every live watch on the account. Cost: free; API key required.",
+   "method": "GET",
+   "path": "/v1/watches",
+   "kind": "record",
+   "answer": "WatchList",
+   "args": []
+  },
+  {
+   "command": "events",
+   "tool": "list_events",
+   "title": "Read events",
+   "description": "Events of the account's watches, oldest first. Keep next_cursor and pass it as cursor to read only what came after. Cost: free; API key required.",
+   "method": "GET",
+   "path": "/v1/events",
+   "kind": "record",
+   "answer": "EventPage",
+   "args": [
+    {
+     "name": "cursor",
+     "http": "cursor",
+     "where": "query",
+     "required": false,
+     "type": "string",
+     "description": ""
+    },
+    {
+     "name": "types",
+     "http": "types",
+     "where": "query",
+     "required": false,
+     "type": "array",
+     "enum": [
+      "domain.ip_changed",
+      "domain.ns_changed",
+      "domain.down",
+      "domain.up",
+      "domain.parked",
+      "domain.listed",
+      "domain.delisted",
+      "domain.reregistered",
+      "domain.expiring",
+      "domain.expired",
+      "domain.held",
+      "phone.listed",
+      "phone.delisted",
+      "wallet.listed",
+      "wallet.delisted",
+      "wallet.sanctioned",
+      "brand.lookalike_registered",
+      "brand.lookalike_cert",
+      "brand.lookalike_live"
+     ],
+     "description": ""
+    },
+    {
+     "name": "watch_id",
+     "http": "watch_id",
+     "where": "query",
+     "required": false,
+     "type": "string",
+     "description": ""
+    },
+    {
+     "name": "limit",
+     "http": "limit",
+     "where": "query",
+     "required": false,
+     "type": "integer",
+     "description": ""
+    }
+   ]
+  }
+ ],
+ "free": {
+  "monthly_credits": 1000
+ },
+ "codes": {
+  "LISTED_BLOCKLIST": [
+   "On scam blocklist",
+   "critical"
+  ],
+  "TEXT_SCAM_PLAYBOOK": [
+   "Scam playbook",
+   "high"
+  ],
+  "TEXT_SCAM_TACTIC": [
+   "Scam tactic",
+   "medium"
+  ],
+  "TEXT_MULTIPLE_TELLS": [
+   "Multiple scam tells",
+   "medium"
+  ],
+  "TEXT_SCAM_WORDING": [
+   "Common scam wording",
+   "medium"
+  ],
+  "DOMAIN_ALLOWLISTED": [
+   "Established domain (allowlist)",
+   "info"
+  ],
+  "DOMAIN_AGE_GT_1Y": [
+   "Established domain",
+   "info"
+  ],
+  "DOMAIN_AGE_90D_1Y": [
+   "Established domain (<1y)",
+   "info"
+  ],
+  "DOMAIN_AGE_30_90D": [
+   "Recently-registered domain",
+   "medium"
+  ],
+  "DOMAIN_AGE_LT_30D": [
+   "Brand-new domain",
+   "medium"
+  ],
+  "DOMAIN_MULTITENANT_PLATFORM": [
+   "Hosted on a public platform",
+   "info"
+  ],
+  "DOMAIN_AGE_UNKNOWN": [
+   "Domain age unknown",
+   "info"
+  ],
+  "DOMAIN_LOOKALIKE_BRAND_WORD": [
+   "Lookalike domain",
+   "medium"
+  ],
+  "DOMAIN_MIXED_SCRIPT": [
+   "Fake domain (mixed alphabets)",
+   "high"
+  ],
+  "DOMAIN_HOMOGLYPH_BRAND": [
+   "Fake domain (homoglyph)",
+   "high"
+  ],
+  "DOMAIN_BRAND_ON_ABUSED_TLD": [
+   "Fake domain (brand + suspicious TLD)",
+   "high"
+  ],
+  "DOMAIN_TYPO_BRAND": [
+   "Possible fake domain (typo)",
+   "medium"
+  ],
+  "DOMAIN_BRAND_SCAM_WORD": [
+   "Possible fake domain (brand + scam word)",
+   "medium"
+  ],
+  "TLD_HIGH_ABUSE": [
+   "Risky domain",
+   "medium"
+  ],
+  "URL_LISTED_THREAT_INTEL": [
+   "Known dangerous link",
+   "critical"
+  ],
+  "URL_HIGH_RISK_SCORE": [
+   "High-risk link",
+   "high"
+  ],
+  "URL_SUSPICIOUS_SCORE": [
+   "Suspicious link",
+   "medium"
+  ],
+  "PAGE_MALICIOUS": [
+   "Dangerous page",
+   "high"
+  ],
+  "EMAIL_DISPOSABLE": [
+   "Disposable email",
+   "high"
+  ],
+  "EMAIL_SENDER_DOMAIN_FORGED": [
+   "Forged sender domain",
+   "high"
+  ],
+  "EMAIL_DOMAIN_NO_MX": [
+   "Domain can't receive email",
+   "medium"
+  ],
+  "EMAIL_FREE_PROVIDER": [
+   "Free email address",
+   "medium"
+  ],
+  "EMAIL_HIGH_RISK": [
+   "High-risk sender",
+   "high"
+  ],
+  "EMAIL_RISKY": [
+   "Risky sender",
+   "medium"
+  ],
+  "PHONE_INVALID": [
+   "Invalid number",
+   "medium"
+  ],
+  "PHONE_UNPARSEABLE": [
+   "Number unreadable",
+   "info"
+  ],
+  "PHONE_VOIP": [
+   "VoIP / virtual number",
+   "medium"
+  ],
+  "PHONE_RISK_FLAGGED": [
+   "Flagged number",
+   "medium"
+  ],
+  "PHONE_PUBLIC_SCAM_REPORTS": [
+   "Reported scam number",
+   "medium"
+  ],
+  "PHONE_NO_PUBLIC_LISTING": [
+   "No public listing",
+   "info"
+  ],
+  "IMAGE_DEPICTS_SCAM": [
+   "Scam screenshot",
+   "high"
+  ],
+  "CAMPAIGN_WIDESPREAD": [
+   "Widely-circulating scam (≥5 in 7 days)",
+   "high"
+  ],
+  "CAMPAIGN_SEEN_BEFORE": [
+   "Reported before (2-4)",
+   "medium"
+  ],
+  "BRAND_CHANNEL_MISMATCH": [
+   "Doesn't match the real organization",
+   "high"
+  ],
+  "OPERATOR_PREDATORY": [
+   "Known for predatory fees",
+   "medium"
+  ],
+  "NOT_LISTED": [
+   "Not blocklisted",
+   "info"
+  ],
+  "BREACH_UNCHECKED": [
+   "Exposure unknown",
+   "info"
+  ],
+  "EMAIL_CHECKED": [
+   "Email checked",
+   "info"
+  ],
+  "PHONE_CHECKED": [
+   "Number checked",
+   "info"
+  ],
+  "PHONE_OWNER_UNCHECKED": [
+   "Owner not checked",
+   "info"
+  ],
+  "PHONE_PUBLIC_LISTING": [
+   "Number owner",
+   "info"
+  ],
+  "PAGE_READ_CLEAN": [
+   "Page read",
+   "info"
+  ],
+  "PAGE_NOT_ANALYZED": [
+   "Page not analyzed",
+   "info"
+  ],
+  "URL_CHECKED": [
+   "Link checked",
+   "info"
+  ],
+  "IP_CHECKED": [
+   "Address checked",
+   "info"
+  ],
+  "DNS_CHECKED": [
+   "DNS checked",
+   "info"
+  ],
+  "IBAN_CHECKED": [
+   "IBAN checked",
+   "info"
+  ],
+  "APP_CHECKED": [
+   "App checked",
+   "info"
+  ],
+  "DOMAIN_DECEPTIVE_STRUCTURE": [
+   "A brand name placed before an @ so the real host hides after it",
+   "high"
+  ],
+  "SHORTCODE_LEGITIMATE": [
+   "A short code a real company sends from",
+   "info"
+  ],
+  "SHORTCODE_MIXED_USE": [
+   "A shared short code used by several senders",
+   "medium"
+  ],
+  "SHORTCODE_SCAM": [
+   "A short code known for scam texts",
+   "high"
+  ],
+  "SHORTCODE_UNREGISTERED": [
+   "A short code not in the directory",
+   "low"
+  ],
+  "IP_LISTED": [
+   "An address on a confirmed abuse list",
+   "high"
+  ],
+  "IP_DATACENTER_FOR_SENDER": [
+   "A sender hosted in a datacenter, not a home or business network",
+   "low"
+  ],
+  "PHONE_FTC_COMPLAINTS": [
+   "Complaints about this number at the FTC",
+   "medium"
+  ],
+  "PHONE_FCC_COMPLAINTS": [
+   "Complaints about this number at the FCC",
+   "medium"
+  ],
+  "PHONE_HONEYPOT_HIT": [
+   "Called our honeypot lines",
+   "high"
+  ],
+  "DOMAIN_CERT_LT_48H": [
+   "First TLS certificate issued in the last 48 hours",
+   "medium"
+  ],
+  "URL_SHORTENER": [
+   "Uses a link shortener",
+   "info"
+  ],
+  "URL_REDIRECT_CROSS_DOMAIN": [
+   "Redirects to a different domain",
+   "medium"
+  ],
+  "WALLET_LISTED": [
+   "A wallet on a confirmed scam list",
+   "critical"
+  ],
+  "WALLET_SANCTIONED": [
+   "A wallet on a US sanctions list",
+   "high"
+  ],
+  "LISTED_CAUTION": [
+   "On a broad threat list that also holds spam and malware hosts",
+   "medium"
+  ],
+  "PHONE_REPORTED_CALLER_ID": [
+   "Shown as the caller ID of complained-about calls, which callers can fake",
+   "medium"
+  ],
+  "PROTECTIVE_DNS_BLOCKED": [
+   "Blocked by public protective DNS resolvers",
+   "medium"
+  ],
+  "PLATFORM_TAKEDOWN": [
+   "The hosting platform took it down",
+   "high"
+  ],
+  "PLATFORM_WARNING": [
+   "The platform shows a phishing or malware warning in front of it",
+   "high"
+  ],
+  "DOMAIN_REGISTRY_HOLD": [
+   "The registry holds the domain out of the DNS",
+   "high"
+  ],
+  "DOMAIN_REGISTRAR_HOLD": [
+   "The registrar suspended the domain",
+   "medium"
+  ],
+  "HANDLE_REPORTED": [
+   "A payment handle reported in scams",
+   "medium"
+  ],
+  "IBAN_CHECKSUM_INVALID": [
+   "The IBAN fails its check digits",
+   "medium"
+  ],
+  "IBAN_FORMAT_INVALID": [
+   "Not a valid IBAN for its country",
+   "medium"
+  ],
+  "IBAN_COUNTRY_MISMATCH": [
+   "The account is in another country than the payee claims",
+   "medium"
+  ],
+  "APP_REMOVED": [
+   "The store pulled the app",
+   "medium"
+  ],
+  "SHORTLINK_DISABLED": [
+   "The link shortener disabled the link",
+   "high"
+  ],
+  "SHORTLINK_WARNING": [
+   "The link shortener warns before the destination",
+   "medium"
+  ],
+  "SHORTLINK_READ": [
+   "Short link read",
+   "info"
+  ],
+  "HANDLE_INACTIVE": [
+   "The payment profile is not active",
+   "medium"
+  ],
+  "HANDLE_CHECKED": [
+   "Payment handle checked",
+   "info"
+  ],
+  "TEXT_PAYMENT_REQUEST": [
+   "Asks for a payment",
+   "medium"
+  ],
+  "TEXT_CREDENTIAL_REQUEST": [
+   "Asks for a password or login",
+   "high"
+  ],
+  "TEXT_CODE_REQUEST": [
+   "Asks for a one-time code",
+   "high"
+  ],
+  "TEXT_URGENCY": [
+   "Pushes the reader to act fast",
+   "low"
+  ],
+  "TEXT_THREAT": [
+   "Threatens a penalty, arrest or lost account",
+   "medium"
+  ],
+  "TEXT_UNEXPECTED_REWARD": [
+   "Offers a prize, refund or money out of nowhere",
+   "medium"
+  ],
+  "TEXT_CALLBACK_REQUEST": [
+   "Asks the reader to call a number",
+   "medium"
+  ],
+  "TEXT_SENDER_BRAND_MISMATCH": [
+   "The sender does not match the brand it claims to be",
+   "high"
+  ],
+  "TEXT_LINK_BRAND_MISMATCH": [
+   "The link does not go to the brand it claims to be",
+   "high"
+  ],
+  "PAGE_CREDENTIAL_HARVEST": [
+   "The page asks for a login it should not",
+   "high"
+  ],
+  "PAGE_PAYMENT_HARVEST": [
+   "The page asks for card or bank details it should not",
+   "high"
+  ],
+  "CLASS_OWN_RECORD": [
+   "The user's own receipt or record, not an inbound message",
+   "info"
+  ],
+  "CLASS_NOT_SECURITY_RELEVANT": [
+   "Nothing to judge: no request, link or claim",
+   "info"
+  ]
+ },
+ "words": {
+  "ask": {
+   "pay": "Pay",
+   "click_link": "Click a link",
+   "call_back": "Call back",
+   "give_credentials": "Give a login or password",
+   "give_code": "Share a code",
+   "install_app": "Install an app",
+   "reply": "Reply",
+   "other": "Something else",
+   "none": "Nothing"
+  },
+  "labels": {
+   "impersonates": "Impersonates",
+   "ask": "Asks to",
+   "artifact_type": "Message type",
+   "reasons": "Reason codes",
+   "entities": "Entities"
+  }
+ }
+}

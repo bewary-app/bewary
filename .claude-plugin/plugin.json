@@ -1,0 +1,16 @@
+{
+  "name": "bewary",
+  "displayName": "Bewary",
+  "version": "0.1.0",
+  "description": "Scam, phishing and fraud checks for links, domains, phone numbers, emails, crypto wallets and IBANs, through Bewary's remote MCP server, with a skill that tells the agent when to check and how to act on the verdict.",
+  "author": { "name": "Bewary", "email": "hello@bewary.app", "url": "https://bewary.app" },
+  "homepage": "https://bewary.app/mcp",
+  "repository": "https://github.com/bewary-app/bewary",
+  "license": "MIT",
+  "keywords": ["scam", "phishing", "fraud", "security", "threat-intelligence", "url-reputation", "mcp"],
+  "icon": "./assets/icon-512.png",
+  "documentationUrl": "https://bewary.app/docs/ai-agents",
+  "supportUrl": "https://bewary.app/support",
+  "privacyPolicyUrl": "https://bewary.app/privacy",
+  "termsOfServiceUrl": "https://bewary.app/terms"
+}

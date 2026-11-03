@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "bewary": {
+      "type": "http",
+      "url": "https://api.bewary.app/mcp"
+    }
+  }
+}
