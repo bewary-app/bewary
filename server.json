@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "app.bewary/bewary",
-  "title": "Bewary scam check",
-  "description": "Scam checks for links, domains, phones, emails, IPs, wallets, IBANs, apps, payment handles",
-  "version": "1.8.0",
+  "title": "Bewary: scam, phishing and fraud detection",
+  "description": "Threat intelligence for AI agents: checks URLs, domains, phones, emails, wallets and IBANs for scams",
+  "version": "1.11.0",
   "websiteUrl": "https://bewary.app/mcp",
   "repository": {
     "url": "https://github.com/bewary-app/bewary",

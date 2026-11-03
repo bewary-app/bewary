@@ -3,7 +3,7 @@ name: bewary
 description: "Bewary is a scam detection API and MCP server for apps and AI agents. It looks up links, domains, IP addresses, phone numbers, SMS short codes, email addresses, crypto wallets, IBANs, mobile apps and payment handles, and its watches send an event when a watched domain, number, wallet or brand changes. The CLI runs as `npx bewary` with no install, with one command per MCP tool. Use when a user asks whether a link, number, address or account they received is a scam, and before an agent opens a link, calls or texts a number, pays or replies."
 ---
 
-# Bewary scam check
+# Bewary: scam, phishing and fraud detection
 
 Each check and lookup returns `verdict` (`scam`, `suspicious`, `safe` or `unknown`), `p_scam`, `reason_codes`, `classification`, `entities` with their own `verdict` and typed `facts`, and `signals` with source class and weight. Use the MCP tools when they are installed, the CLI when the agent can run shell commands, and the REST API when it calls from code.
 
