@@ -11,14 +11,14 @@
   },
   "icons": [
     {
-      "src": "https://bewary.app/apple-touch-icon.png",
+      "src": "https://bewary.app/brand/icon-512.png",
       "mimeType": "image/png",
       "sizes": [
-        "180x180"
+        "512x512"
       ]
     },
     {
-      "src": "https://bewary.app/favicon.svg",
+      "src": "https://bewary.app/brand/icon.svg",
       "mimeType": "image/svg+xml",
       "sizes": [
         "any"
