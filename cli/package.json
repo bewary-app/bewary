@@ -1,14 +1,38 @@
 {
   "name": "bewary",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Scam checks from the terminal: links, domains, phone numbers, short codes, emails, IPs, wallets, IBANs, apps and payment handles, on the Bewary API.",
-  "keywords": ["scam", "phishing", "fraud", "security", "cli", "mcp", "api"],
+  "keywords": [
+    "scam",
+    "phishing",
+    "fraud",
+    "security",
+    "cli",
+    "mcp",
+    "api"
+  ],
   "homepage": "https://bewary.app/docs/cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bewary-app/bewary.git",
+    "directory": "cli"
+  },
+  "bugs": {
+    "url": "https://github.com/bewary-app/bewary/issues"
+  },
   "license": "MIT",
   "type": "module",
-  "bin": { "bewary": "bin/bewary.mjs" },
-  "files": ["bin", "lib", "README.md"],
-  "engines": { "node": ">=18" },
+  "bin": {
+    "bewary": "bin/bewary.mjs"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "gen": "node scripts/gen.mjs",
     "test": "node scripts/gen.mjs --check && node --test"

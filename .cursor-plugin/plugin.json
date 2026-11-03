@@ -1,7 +1,7 @@
 {
   "name": "bewary",
   "displayName": "Bewary",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Scam, phishing and fraud checks for links, domains, phone numbers, emails, crypto wallets and IBANs through Bewary's remote MCP server.",
   "author": { "name": "Bewary", "email": "hello@bewary.app" },
   "license": "MIT",

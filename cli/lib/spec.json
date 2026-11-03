@@ -1,7 +1,7 @@
 {
  "generated_from": "web/src/data/api/{openapi,mcp-tools,codes,pricing}.json + web/src/data/answer-words.json",
  "api": "https://api.bewary.app",
- "version": "1.8.0",
+ "version": "1.10.0",
  "commands": [
   {
    "command": "url",
@@ -769,6 +769,10 @@
   ],
   "WALLET_SANCTIONED": [
    "A wallet on a US sanctions list",
+   "high"
+  ],
+  "WALLET_FROZEN_BY_ISSUER": [
+   "A wallet a stablecoin issuer froze",
    "high"
   ],
   "LISTED_CAUTION": [
