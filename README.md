@@ -15,6 +15,8 @@ A free key gets 1,000 credits a month, no card: https://bewary.app/account. A lo
 
 Clients that support sign-in (Claude, ChatGPT, Claude Code, Cursor) can connect to `https://api.bewary.app/mcp` and sign in to Bewary with OAuth. Any client can send an API key as an `Authorization: Bearer` header instead.
 
+The MCP server runs only at that address: there is no local or stdio server to install. The `bewary` CLI further down is a terminal tool, not an MCP server.
+
 **Claude Code**
 
 ```bash
