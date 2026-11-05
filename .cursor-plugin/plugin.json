@@ -4,6 +4,8 @@
   "version": "0.1.2",
   "description": "Scam, phishing and fraud checks for links, domains, phone numbers, emails, crypto wallets and IBANs through Bewary's remote MCP server.",
   "author": { "name": "Bewary", "email": "hello@bewary.app" },
+  "homepage": "https://bewary.app/mcp",
+  "repository": "https://github.com/bewary-app/bewary",
   "license": "MIT",
   "keywords": ["scam", "phishing", "fraud", "security", "threat intelligence", "mcp"],
   "logo": "assets/logo.svg"
