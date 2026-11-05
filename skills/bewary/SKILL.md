@@ -65,7 +65,7 @@ Medium  Lookalike domain                      DOMAIN_LOOKALIKE_BRAND_WORD
 url     https://amazon-orders-help.top/confirm  Scam
 domain  amazon-orders-help.top                  Scam
 
-req_01M6A6HXWF86METPG24EPK22Z9
+req_01M6P1X68AEN0HFFHBZAN2S3ZT · 979 credits left
 ```
 
 To keep it installed: `npm install -g bewary`. It needs Node 18 or newer and nothing else.

@@ -1,6 +1,6 @@
 {
   "name": "bewary",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Scam, phishing and fraud checks for links, domains, phone numbers, emails, crypto wallets and IBANs, through Bewary's remote MCP server.",
   "mcpServers": {
     "bewary": {

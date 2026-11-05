@@ -1,7 +1,7 @@
 {
  "generated_from": "web/src/data/api/{openapi,mcp-tools,codes,pricing}.json + web/src/data/answer-words.json",
  "api": "https://api.bewary.app",
- "version": "1.10.0",
+ "version": "1.12.1",
  "commands": [
   {
    "command": "url",
@@ -818,6 +818,26 @@
   "IBAN_COUNTRY_MISMATCH": [
    "The account is in another country than the payee claims",
    "medium"
+  ],
+  "IBAN_BANK_UNKNOWN": [
+   "No bank uses the IBAN's bank code",
+   "medium"
+  ],
+  "IBAN_BANK_CLOSED": [
+   "The IBAN's bank code is no longer in use",
+   "medium"
+  ],
+  "IBAN_ACCOUNT_CHECK_FAILED": [
+   "The account number fails its bank's check digit",
+   "medium"
+  ],
+  "IBAN_INTERNAL_ACCOUNT": [
+   "An account number banks keep for their own use",
+   "medium"
+  ],
+  "IBAN_BANK_SANCTIONED": [
+   "The IBAN's bank is on a sanctions list",
+   "high"
   ],
   "APP_REMOVED": [
    "The store pulled the app",

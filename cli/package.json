@@ -1,6 +1,6 @@
 {
   "name": "bewary",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Scam checks from the terminal: links, domains, phone numbers, short codes, emails, IPs, wallets, IBANs, apps and payment handles, on the Bewary API.",
   "keywords": [
     "scam",
